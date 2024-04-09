@@ -1,0 +1,37 @@
+from random import choice
+
+
+class RandomizedSet:
+
+    def __init__(self):
+        self.nums = []
+        self.idx_map = dict()
+
+    def insert(self, val):
+        if val not in self.idx_map:
+            self.idx_map[val] = len(self.nums)
+            self.nums.append(val)
+            return True
+        return False
+
+    def remove(self, val):
+        if val in self.idx_map:
+            swap_val, idx = self.nums[-1], self.idx_map[val]
+            self.nums[idx] = swap_val
+            self.idx_map[swap_val] = idx
+            del self.idx_map[val]
+            self.nums.pop()
+            return True
+        return False
+
+    def getRandom(self):
+        return choice(self.nums)
+
+
+
+if __name__ == "__main__":
+
+    obj = RandomizedSet()
+    param_1 = obj.insert(val)
+    param_2 = obj.remove(val)
+    param_3 = obj.getRandom()
