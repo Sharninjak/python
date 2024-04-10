@@ -116,12 +116,6 @@ dic1.update({"age": 1000})
 print(copydic1)
 print(copy1dic1)
 
-
-# merge dictionaries
-
-
-
-
 # nested dictionary
 # 1
 myfamily = {
@@ -163,6 +157,14 @@ for x, obj in myfamily.items():
     print(x)
     for y in obj:
         print(y + ':', obj[y])
+# list
+thislist = ["apple", "banana", "cherry"]
+[print(x) for x in thislist]
 
-
+# tuple
+fruits = ("apple", "mango", "papaya", "pineapple", "cherry")
+(green, *tropic, red) = fruits
+print(green)
+print(tropic)  # ['mango', 'papaya', 'pineapple']
+print(red)
 
