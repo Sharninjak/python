@@ -1,37 +1,26 @@
-from random import choice
+import random
 
 
-class RandomizedSet:
-
+class RandomizedSet(object):
+    # https://leetcode.cn/problems/insert-delete-getrandom-o1/description/?envType=study-plan-v2&envId=top-interview-150
     def __init__(self):
-        self.nums = []
-        self.idx_map = dict()
+        self.sets = set()
 
     def insert(self, val):
-        if val not in self.idx_map:
-            self.idx_map[val] = len(self.nums)
-            self.nums.append(val)
-            return True
-        return False
+        if val in self.sets:
+            return False
+        self.sets.add(val)
+        return True
 
     def remove(self, val):
-        if val in self.idx_map:
-            swap_val, idx = self.nums[-1], self.idx_map[val]
-            self.nums[idx] = swap_val
-            self.idx_map[swap_val] = idx
-            del self.idx_map[val]
-            self.nums.pop()
+        if val in self.sets:
+            self.sets.discard(val)
             return True
         return False
 
     def getRandom(self):
-        return choice(self.nums)
+        return random.choice(list(self.sets))
+    
+class ArrayProductDivide(object):
+    def productExceptSelf(self, nums):
 
-
-
-if __name__ == "__main__":
-
-    obj = RandomizedSet()
-    param_1 = obj.insert(val)
-    param_2 = obj.remove(val)
-    param_3 = obj.getRandom()
