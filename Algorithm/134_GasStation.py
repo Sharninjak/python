@@ -12,5 +12,54 @@
 # 开往 2 号加油站，此时油箱有 6 - 4 + 3 = 5 升汽油
 # 开往 3 号加油站，你需要消耗 5 升汽油，正好足够你返回到 3 号加油站。
 # 因此，3 可为起始索引。
+class GasStation(object):
+    def canCompleteCircuit1(self, gas, cost):
+        # 95 ms, 14.84 mb
+        # 原理：如果i起点，可以到j但是不能到j+1，那么从i+1到j任意一个地方为起点，都不能到j+1
+        # 从0开始，如果能到j不能到j+1，则记下差的油toHere，再以j+1为起点，最远到k+1，toHere加上j+1到k+1差的油，直到能到n-1
+        # 将到n-1的存油与toHere比较
+        n = len(gas)
+        i = 0
+        toHere = 0
+        while(i < n):
+            sumGas = 0
+            sumCost = 0
+            j = i
+            while(j < n):
+                sumGas += gas[j]
+                sumCost += cost[j]
+                if sumGas < sumCost:
+                    toHere = toHere + sumCost - sumGas
+                    break
+                j += 1
+            if sumGas >= sumCost + toHere:
+                return i
+            i = j+1
+        return -1
+    
+    def canCompleteCircuit2(self, gas, cost):
+        # 85 ms, 17.50 mb
+        # 通过画折线图，只有在最低点对应的x为起点才可能成功，同时sumGas>=sumCost
+        n = len(gas)
+        min = 0
+        indexOfMin = 0
+        spare = 0
+        for i in range(n):
+            spare += gas[i] - cost[i]
+            if(spare < min):
+                min = spare
+                indexOfMin = i
+        if spare < 0:
+            return -1
+        if min >= 0:
+            return 0
+        return (indexOfMin+1)%n
 
 
+
+test = GasStation()
+# gas = [1,2,3,4,5]
+# cost = [3,4,5,1,2]
+gas = [2,3,4]
+cost = [3,4,3]
+print(test.canCompleteCircuit2(gas, cost))
