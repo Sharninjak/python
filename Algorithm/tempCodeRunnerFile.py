@@ -1,0 +1,1 @@
+''.join(ch for row in mat for ch in row if ch)
