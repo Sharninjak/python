@@ -63,3 +63,4 @@ test = GasStation()
 gas = [2,3,4]
 cost = [3,4,3]
 print(test.canCompleteCircuit2(gas, cost))
+
