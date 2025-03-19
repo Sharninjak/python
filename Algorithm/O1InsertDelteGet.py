@@ -20,3 +20,8 @@ class RandomizedSet(object):
 
     def getRandom(self):
         return random.choice(list(self.sets))
+    
+class ArrayProductDivide(object):
+    def productExceptSelf(self, nums):
+
+
